@@ -1,0 +1,472 @@
+/* Reset dasar */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #121212;
+  color: #f1f1f1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ================== Tampilan Auth (Login/Register) ================== */
+
+/* Jika auth-container didefinisikan di HTML, styling berikut bisa digunakan di luar auth-card */
+/* .auth-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #121212;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.5s ease-in-out;
+  z-index: 2000;
+} */
+/* Tombol bulat dasar */
+.circle-btn {
+  width: 50px;
+  /* Ukuran lebar tombol */
+  height: 50px;
+  /* Ukuran tinggi tombol */
+  border-radius: 50%;
+  /* Membuat bentuk lingkaran */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  /* Ukuran ikon */
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  margin: 0 5px;
+}
+
+.nameAi {
+  margin: 10px;
+  text-align: center;
+}
+
+/* Auth Card Container */
+.auth-card {
+  background-color: #1e1e1e;
+  padding: 40px 30px;
+  border-radius: 8px;
+  width: 320px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.6s ease-out;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+/* Tabs di bagian atas */
+.auth-tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.auth-tabs button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.auth-tabs button.active {
+  border-color: #007bff;
+}
+
+/* Container Form */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.auth-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Input styling */
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #2c2c2c;
+  color: #fff;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.input-group input:focus {
+  background-color: #333;
+  outline: none;
+}
+
+/* Button Styling */
+.btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.primary-btn {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.primary-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Divider styling */
+.divider {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+  color: #aaa;
+}
+
+.divider span {
+  background-color: #1e1e1e;
+  padding: 0 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.divider:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #333;
+  z-index: 0;
+}
+
+/* Social Buttons */
+.social-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Warna khusus Google */
+.google-btn {
+  background-color: #db4437;
+  /* Merah khas Google */
+  transition: background-color 0.3s;
+}
+
+.google-btn:hover {
+  background-color: #c33d2e;
+  /* Lebih gelap saat hover */
+}
+
+/* Warna khusus GitHub */
+.github-btn {
+  background-color: #24292e;
+  /* Warna khas GitHub */
+  transition: background-color 0.3s;
+}
+
+.github-btn:hover {
+  background-color: #1b1f23;
+  /* Lebih gelap saat hover */
+}
+
+/* Warna khusus Yahoo */
+.yahoo-btn {
+  background-color: #410093;
+  /* Warna khas Yahoo */
+  transition: background-color 0.3s;
+}
+
+.yahoo-btn:hover {
+  background-color: #32007b;
+  /* Lebih gelap saat hover */
+}
+
+
+/* Toggle Text */
+.toggle-text {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+.toggle-text span {
+  color: #007bff;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.toggle-text span:hover {
+  color: #0056b3;
+}
+
+/* Animasi untuk Auth */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ================== Tampilan Chat ================== */
+/* Container utama dengan layout flex */
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Sidebar kiri */
+.sidebar {
+  width: 250px;
+  background-color: #2c2c2c;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Header sidebar dengan tombol */
+.sidebar-header {
+  padding: 10px;
+  background-color: #1e1e1e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-header button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar-header button:hover {
+  background-color: #0056b3;
+}
+
+/* Daftar riwayat chat */
+.chat-history {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-history .chat-item {
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: #1e1e1e;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.chat-history .chat-item:hover {
+  background-color: #333;
+}
+
+.chat-item.active {
+  border: 2px solid #007bff;
+}
+
+/* Area chat utama */
+.chat-container {
+  flex: 1;
+  height: 100vh;
+  background-color: #1e1e1e;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Area chat */
+.chat-box {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Bubble chat untuk pesan */
+.message {
+  max-width: 80%;
+  margin-bottom: 12px;
+  border-radius: 20px;
+  line-height: 1.4;
+  font-size: 14px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.message.user {
+  align-self: flex-end;
+  background-color: #007bff;
+  color: #fff;
+  border-bottom-right-radius: 0;
+  padding: 10px 16px;
+}
+
+.message.bot {
+  align-self: flex-start;
+  background-color: #333;
+  border-bottom-left-radius: 0;
+  padding: 20px 40px;
+}
+
+/* Form chat */
+#chat-form {
+  display: flex;
+  padding: 12px;
+  background-color: #1e1e1e;
+  border-top: 1px solid #333;
+}
+
+#message-input {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 20px;
+  margin-right: 8px;
+  background-color: #2c2c2c;
+  color: #fff;
+}
+
+#message-input:focus {
+  outline: none;
+  background-color: #333;
+}
+
+#chat-form button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 20px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#chat-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Tombol Show Sidebar */
+#show-sidebar-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+#show-sidebar-btn:hover {
+  background-color: #0056b3;
+}
+
+/* ================== Profile Container & Dropdown ================== */
+/* Profile container di sudut kanan atas */
+#profile-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1500;
+  cursor: pointer;
+}
+
+/* Gambar profile */
+#profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 5px;
+  min-width: 150px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Dropdown items */
+.dropdown-item {
+  width: 100%;
+  padding: 10px;
+  background: none;
+  border: none;
+  text-align: left;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: #333;
+}
+
+/* Tombol logout berubah jadi merah saat hover */
+.dropdown-item.logout:hover {
+  background-color: red;
+}

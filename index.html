@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reen AI Chat</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- Highlight.js untuk syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <!-- Firebase libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <script>
+    // Inisialisasi Firebase – ganti dengan konfigurasi project Anda
+    var firebaseConfig = {
+      apiKey: "AIzaSyACFn18vgemEB82ZzSPHGDSy0286p8w4Pk",
+      authDomain: "meme-comunity.firebaseapp.com",
+      projectId: "meme-comunity",
+      storageBucket: "meme-comunity.firebasestorage.app",
+      messagingSenderId: "606090326187",
+      appId: "1:606090326187:web:bd9a91e63b0f1c80a6c7ee",
+      measurementId: "G-QR4YPSKW3C"
+    };
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
+    var auth = firebase.auth();
+    // Global userId (akan diupdate setelah login)
+    var userId = null;
+  </script>
+</head>
+
+<body>
+  <!-- Tampilan Login/Register -->
+  <div id="auth-container" class="auth-container">
+    <div class="auth-card">
+      <h1 class="nameAi">ReenAi</h1>
+      <div class="auth-tabs">
+        <button id="login-tab" class="active">Login</button>
+        <button id="register-tab">Register</button>
+      </div>
+      <div class="auth-forms">
+        <!-- Login Form -->
+        <div class="auth-form" id="login-form">
+          <h2>Login</h2>
+          <div class="input-group">
+            <input type="email" id="login-email" placeholder="Email" required>
+          </div>
+          <div class="input-group">
+            <input type="password" id="login-password" placeholder="Password" required>
+          </div>
+          <button id="login-btn" class="btn primary-btn">Login</button>
+          <div class="divider"><span>OR</span></div>
+          <div class="social-buttons">
+            <button id="google-login-btn" class="btn circle-btn google-btn">
+              <i class="fab fa-google"></i>
+            </button>
+            <button id="github-login-btn" class="btn circle-btn github-btn">
+              <i class="fab fa-github"></i>
+            </button>
+            <button id="yahoo-login-btn" class="btn circle-btn yahoo-btn">
+              <i class="fab fa-yahoo"></i>
+            </button>
+          </div>
+          <p class="toggle-text">
+            Don't have an account? <span id="show-register">Register</span>
+          </p>
+        </div>
+
+        <!-- Register Form -->
+        <div class="auth-form" id="register-form" style="display:none;">
+          <h2>Register</h2>
+          <div class="input-group">
+            <input type="email" id="register-email" placeholder="Email" required>
+          </div>
+          <div class="input-group">
+            <input type="password" id="register-password" placeholder="Password" required>
+          </div>
+          <div class="input-group">
+            <input type="password" id="register-confirm-password" placeholder="Confirm Password" required>
+          </div>
+          <button id="register-btn" class="btn primary-btn">Register</button>
+          <div class="divider"><span>OR</span></div>
+          <div class="social-buttons">
+            <button id="google-register-btn" class="btn circle-btn google-btn">
+              <i class="fab fa-google"></i>
+            </button>
+            <button id="github-register-btn" class="btn circle-btn github-btn">
+              <i class="fab fa-github"></i>
+            </button>
+            <button id="yahoo-register-btn" class="btn circle-btn yahoo-btn">
+              <i class="fab fa-yahoo"></i>
+            </button>
+          </div>
+          <p class="toggle-text">
+            Already have an account? <span id="show-login">Login</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tampilan Chat (App) -->
+  <div class="app-container" id="app-container" style="display:none;">
+    <!-- Sidebar untuk riwayat chat -->
+    <aside class="sidebar">
+      <h1 class="nameAi">ReenAi</h1>
+      <div class="sidebar-header">
+        <button id="new-chat-btn">+ Chat Baru</button>
+        <button id="hide-sidebar-btn">Hide Sidebar</button>
+      </div>
+      <div class="chat-history" id="chat-history">
+        <!-- Riwayat chat akan diload dari Firestore -->
+      </div>
+    </aside>
+    <!-- Area Chat Utama -->
+    <div class="chat-container">
+      <div id="chat-box" class="chat-box">
+        <!-- Pesan chat akan muncul di sini -->
+      </div>
+      <form id="chat-form">
+        <input type="text" id="message-input" placeholder="Tulis pesan anda..." autocomplete="off">
+        <button type="submit">Kirim</button>
+      </form>
+    </div>
+    <!-- Tombol Show Sidebar (muncul saat sidebar disembunyikan) -->
+    <button id="show-sidebar-btn" style="display: none;">Show Sidebar</button>
+  </div>
+  <div id="profile-container">
+    <img id="profile-img" src="/img/profile.png" alt="Profile">
+    <div id="profile-dropdown" class="dropdown-menu">
+      <button id="download-app-btn" class="dropdown-item">Unduh Aplikasi</button>
+      <button id="about-btn" class="dropdown-item">Tentang</button>
+      <button id="logout-btn" class="dropdown-item logout">Logout</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
