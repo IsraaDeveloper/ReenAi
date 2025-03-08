@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const botMessageElement = addMessage('...', 'bot');
 
         try {
-            const response = await fetch('http://panel.imicid.my.id:25565/chat', {
+            const response = await fetch('https://apikey-hci1.vercel.app/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: userMessage })
