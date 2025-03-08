@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const botMessageElement = addMessage('...', 'bot');
 
         try {
-            const response = await fetch('http://38.242.196.10:25565/chat', {
+            const response = await fetch('https://panel.imicid.my.id/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: userMessage })
